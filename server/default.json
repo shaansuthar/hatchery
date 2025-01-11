@@ -149,6 +149,19 @@
           12
         ]
       }
+    ],
+    "characters": [
+      {
+        "id": "CEO",
+        "session": null,
+        "position": [
+          8,
+          11
+        ],
+        "avatarUrl": "https://models.readyplayer.me/6782e488291d1c6abc0eee36.glb",
+        "path": [],
+        "canUpdateRoom": false
+      }
     ]
   },
   {
@@ -300,6 +313,52 @@
           0
         ],
         "rotation": 0
+      }
+    ],
+    "characters": [
+      {
+        "id": "marketing_LEAD",
+        "session": null,
+        "position": [
+          10,
+          8
+        ],
+        "avatarUrl": "https://models.readyplayer.me/6782db349d91f0cde7961b9a.glb",
+        "path": [],
+        "canUpdateRoom": false
+      },
+      {
+        "id": "marketing_1",
+        "session": null,
+        "position": [
+          6,
+          4
+        ],
+        "avatarUrl": "https://models.readyplayer.me/6782e328c08850a48b973412.glb",
+        "path": [],
+        "canUpdateRoom": false
+      },
+      {
+        "id": "marketing_2",
+        "session": null,
+        "position": [
+          4,
+          7
+        ],
+        "avatarUrl": "https://models.readyplayer.me/6782e352bcb92892efb1e9be.glb",
+        "path": [],
+        "canUpdateRoom": false
+      },
+      {
+        "id": "marketing_3",
+        "session": null,
+        "position": [
+          4,
+          11
+        ],
+        "avatarUrl": "https://models.readyplayer.me/6782e3ef2e7fac7574578537.glb",
+        "path": [],
+        "canUpdateRoom": false
       }
     ]
   },
@@ -464,6 +523,52 @@
           0,
           11
         ]
+      }
+    ],
+    "characters": [
+      {
+        "id": "developer_LEAD",
+        "session": null,
+        "position": [
+          11,
+          7
+        ],
+        "avatarUrl": "https://models.readyplayer.me/6782da95c08850a48b96b497.glb",
+        "path": [],
+        "canUpdateRoom": false
+      },
+      {
+        "id": "developer_1",
+        "session": null,
+        "position": [
+          7,
+          7
+        ],
+        "avatarUrl": "https://models.readyplayer.me/6782e42078a1de6649759d18.glb",
+        "path": [],
+        "canUpdateRoom": false
+      },
+      {
+        "id": "developer_2",
+        "session": null,
+        "position": [
+          5,
+          7
+        ],
+        "avatarUrl": "https://models.readyplayer.me/6782e4552e7fac7574578ab5.glb",
+        "path": [],
+        "canUpdateRoom": false
+      },
+      {
+        "id": "developer_3",
+        "session": null,
+        "position": [
+          4,
+          6
+        ],
+        "avatarUrl": "https://models.readyplayer.me/6782eb933db8369d7c127b85.glb",
+        "path": [],
+        "canUpdateRoom": false
       }
     ]
   }

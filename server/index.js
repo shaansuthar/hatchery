@@ -75,9 +75,10 @@ const loadRooms = async () => {
     const room = {
       ...roomItem,
       size: [7, 7], // HARDCODED FOR SIMPLICITY PURPOSES
-      gridDivision: 2,
-      characters: [],
+      gridDivision: 2
+      //characters: [],
     };
+    //console.log(characters);
     room.grid = new pathfinding.Grid(
       room.size[0] * room.gridDivision,
       room.size[1] * room.gridDivision
@@ -97,7 +98,7 @@ const generateRandomPosition = (room) => {
     const x = Math.floor(Math.random() * room.size[0] * room.gridDivision);
     const y = Math.floor(Math.random() * room.size[1] * room.gridDivision);
     if (room.grid.isWalkableAt(x, y)) {
-      return [x, y];
+      return [x, y];f
     }
   }
 };
@@ -108,7 +109,7 @@ io.on("connection", (socket) => {
   try {
     let room = null;
     let character = null;
-
+    console.log(rooms);
     socket.emit("welcome", {
       rooms: rooms.map((room) => ({
         id: room.id,
@@ -127,7 +128,7 @@ io.on("connection", (socket) => {
       character = {
         id: socket.id,
         session: parseInt(Math.random() * 1000),
-        position: generateRandomPosition(room),
+        position: [13, 7],
         avatarUrl: opts.avatarUrl,
       };
       room.characters.push(character);
@@ -221,7 +222,7 @@ io.on("connection", (socket) => {
       updateGrid(room);
       room.characters.forEach((character) => {
         character.path = [];
-        character.position = generateRandomPosition(room);
+        character.position = [13, 7];
       });
       io.to(room.id).emit("mapUpdate", {
         map: {
