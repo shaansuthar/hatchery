@@ -104,10 +104,10 @@ export const Lobby = () => {
               <h1 className="text-center text-white text-2xl font-bold">
                 WELCOME TO
                 <br />
-                WAWA MANSION
+                THE HATCHERY
               </h1>
               <p className="text-center text-white">
-                Please select a room to relax
+                Please select a department
               </p>
               {rooms.map((room) => (
                 <div
@@ -144,7 +144,7 @@ export const Lobby = () => {
           bevelThickness={0.005}
           letterSpacing={0.012}
         >
-          MANSION
+          THE
           <meshStandardMaterial color="white" />
         </Text3D>
 
@@ -159,7 +159,7 @@ export const Lobby = () => {
           bevelThickness={0.005}
           letterSpacing={0.012}
         >
-          WAWA
+          HATCHERY
           <meshStandardMaterial color="white" />
         </Text3D>
         <Skyscraper scale={1.32} />
