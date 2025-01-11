@@ -67,6 +67,36 @@ const PasswordInput = ({ onClose, onSuccess }) => {
   );
 };
 
+const ChatHistoryModal = ({ onClose, chatHistory }) => {
+  return (
+    <div className="fixed z-20 grid place-items-center w-full h-full top-0 left-0">
+      <div
+        className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"
+        onClick={onClose}
+      ></div>
+      <div className="bg-white rounded-lg shadow-lg p-4 z-20 max-w-md w-full">
+        <p className="text-lg font-bold">Chat History</p>
+        <div className="max-h-60 overflow-y-auto space-y-2 mt-2">
+          {chatHistory.map((message, index) => (
+            <div key={index} className={`flex flex-col ${message.senderId === "userId" ? "items-end" : "items-start"}`}>
+              <span className="text-xs text-gray-500">{message.sender}</span>
+              <div className={`bg-blue-500 text-white p-2 rounded-lg max-w-xs ${message.senderId === "userId" ? "ml-2" : "mr-2"}`}>
+                <p className="text-sm">{message.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button
+          className="mt-4 bg-red-500 text-white rounded-lg px-4 py-2"
+          onClick={onClose}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export const UI = () => {
   const [buildMode, setBuildMode] = useAtom(buildModeAtom);
   const [shopMode, setShopMode] = useAtom(shopModeAtom);
@@ -80,6 +110,8 @@ export const UI = () => {
   const [avatarUrl, setAvatarUrl] = useAtom(avatarUrlAtom);
   const [roomID, setRoomID] = useAtom(roomIDAtom);
   const [passwordCorrectForRoom, setPasswordCorrectForRoom] = useState(false);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [showChatHistory, setShowChatHistory] = useState(false);
   const leaveRoom = () => {
     socket.emit("leaveRoom");
     setRoomID(null);
@@ -94,7 +126,9 @@ export const UI = () => {
   const [chatMessage, setChatMessage] = useState("");
   const sendChatMessage = () => {
     if (chatMessage.length > 0) {
+      const newMessage = { senderId: "userId", sender: "You", text: chatMessage };
       socket.emit("chatMessage", chatMessage);
+      setChatHistory((prev) => [...prev, newMessage]);
       setChatMessage("");
     }
   };
@@ -380,6 +414,37 @@ export const UI = () => {
             )}
           </div>
         </div>
+        {/* Chat History Button - Only shown when in a room */}
+        {roomID && (
+          <button
+            className="fixed top-4 right-4 p-4 rounded-full bg-slate-500 text-white drop-shadow-md cursor-pointer hover:bg-slate-800 transition-colors"
+            onClick={() => setShowChatHistory(true)}
+          >
+            {/* Chat History Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              className="w-6 h-6"
+            >
+              <path
+                d="M96 368Q83 368 74 359 64 349 64 336L64 128Q64 114 74 105 83 96 96 96L416 96Q430 96 439 105 448 114 448 128L448 336Q448 349 439 359 430 368 416 368L256 368 160 464 160 368 96 368Z"
+                fill="none"
+                stroke="white"
+                strokeWidth="30"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        )}
+
+        {/* Chat History Modal */}
+        {showChatHistory && (
+          <ChatHistoryModal
+            onClose={() => setShowChatHistory(false)}
+            chatHistory={chatHistory}
+          />
+        )}
       </motion.div>
     </>
   );
