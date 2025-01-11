@@ -132,6 +132,10 @@ io.on("connection", (socket) => {
       };
       room.characters.push(character);
 
+      // WILLIAM TESTING
+      
+      // END WILLIAM TESTING
+
       socket.emit("roomJoined", {
         map: {
           gridDivision: room.gridDivision,
