@@ -1,0 +1,78 @@
+{
+    "officeMap": {
+        "dimensions": {
+        "width": 20,
+        "height": 15
+        },
+        "furniture": [
+        {
+            "type": "Desk",
+            "position": { "x": 5, "y": 3 },
+            "description": "Wooden desk with a computer and a lamp."
+        },
+        {
+            "type": "Chair",
+            "position": { "x": 5, "y": 4 },
+            "description": "Ergonomic chair."
+        },
+        {
+            "type": "MeetingTable",
+            "position": { "x": 10, "y": 7 },
+            "description": "Large round table for team meetings.",
+            "seatingCapacity": 6
+        },
+        {
+            "type": "Cabinet",
+            "position": { "x": 2, "y": 10 },
+            "description": "Metal cabinet for document storage."
+        },
+        {
+            "type": "Whiteboard",
+            "position": { "x": 15, "y": 2 },
+            "description": "Whiteboard with markers for brainstorming."
+        }
+        ],
+        "people": [
+        {
+            "name": "Alice",
+            "role": "Marketing Director",
+            "position": { "x": 5, "y": 3 },
+            "currentActivity": "Checking emails."
+        },
+        {
+            "name": "Bob",
+            "role": "Software Engineer",
+            "position": { "x": 10, "y": 7 },
+            "currentActivity": "Discussing project plans with the team."
+        },
+        {
+            "name": "Carol",
+            "role": "Office Manager",
+            "position": { "x": 2, "y": 10 },
+            "currentActivity": "Organizing files."
+        }
+        ],
+        "obstacles": [
+        {
+            "type": "Wall",
+            "start": { "x": 0, "y": 0 },
+            "end": { "x": 20, "y": 0 }
+        },
+        {
+            "type": "Wall",
+            "start": { "x": 0, "y": 0 },
+            "end": { "x": 0, "y": 15 }
+        },
+        {
+            "type": "Wall",
+            "start": { "x": 0, "y": 15 },
+            "end": { "x": 20, "y": 15 }
+        },
+        {
+            "type": "Wall",
+            "start": { "x": 20, "y": 0 },
+            "end": { "x": 20, "y": 15 }
+        }
+        ]
+    }
+}
