@@ -97,6 +97,49 @@ const ChatHistoryModal = ({ onClose, chatHistory }) => {
   );
 };
 
+const CodeInterfaceModal = ({ onClose }) => {
+  return (
+    <div className="fixed z-20 grid place-items-center w-full h-full top-0 left-0">
+      <div
+        className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"
+        onClick={onClose}
+      ></div>
+      <div className="bg-white rounded-lg shadow-lg p-4 z-20 max-w-4xl w-full h-[80vh]">
+        <div className="flex justify-between items-center mb-4">
+          <p className="text-lg font-bold">Google Search</p>
+          <button
+            className="text-gray-500 hover:text-gray-700"
+            onClick={onClose}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <div className="h-[calc(100%-4rem)]">
+          <iframe
+            src="https://37d39694.bolt-diy-bxk.pages.dev/"
+            className="w-full h-full rounded-lg"
+            title="Code Interface"
+            sandbox="allow-same-origin allow-scripts allow-forms"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const UI = () => {
   const [buildMode, setBuildMode] = useAtom(buildModeAtom);
   const [shopMode, setShopMode] = useAtom(shopModeAtom);
@@ -112,6 +155,8 @@ export const UI = () => {
   const [passwordCorrectForRoom, setPasswordCorrectForRoom] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [showChatHistory, setShowChatHistory] = useState(false);
+  const [showCodeInterfaceModal, setShowCodeInterfaceModal] = useState(false);
+
   const leaveRoom = () => {
     socket.emit("leaveRoom");
     setRoomID(null);
@@ -416,26 +461,49 @@ export const UI = () => {
         </div>
         {/* Chat History Button - Only shown when in a room */}
         {roomID && (
-          <button
-            className="fixed top-4 right-4 p-4 rounded-full bg-slate-500 text-white drop-shadow-md cursor-pointer hover:bg-slate-800 transition-colors"
-            onClick={() => setShowChatHistory(true)}
-          >
-            {/* Chat History Icon */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              className="w-6 h-6"
+          <>
+            <button
+              className="fixed top-4 right-4 p-4 rounded-full bg-slate-500 text-white drop-shadow-md cursor-pointer hover:bg-slate-800 transition-colors"
+              onClick={() => setShowChatHistory(true)}
             >
-              <path
-                d="M96 368Q83 368 74 359 64 349 64 336L64 128Q64 114 74 105 83 96 96 96L416 96Q430 96 439 105 448 114 448 128L448 336Q448 349 439 359 430 368 416 368L256 368 160 464 160 368 96 368Z"
+              {/* Chat History Icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                className="w-6 h-6"
+              >
+                <path
+                  d="M96 368Q83 368 74 359 64 349 64 336L64 128Q64 114 74 105 83 96 96 96L416 96Q430 96 439 105 448 114 448 128L448 336Q448 349 439 359 430 368 416 368L256 368 160 464 160 368 96 368Z"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="30"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+
+            {/* New Button */}
+            <button
+              className="fixed top-20 right-4 p-4 rounded-full bg-slate-500 text-white drop-shadow-md cursor-pointer hover:bg-slate-800 transition-colors"
+              onClick={() => setShowCodeInterfaceModal(true)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                stroke="white"
-                strokeWidth="30"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </button>
+          </>
         )}
 
         {/* Chat History Modal */}
@@ -445,6 +513,9 @@ export const UI = () => {
             chatHistory={chatHistory}
           />
         )}
+
+        {/* Add the new modal */}
+        {showCodeInterfaceModal && <CodeInterfaceModal onClose={() => setShowCodeInterfaceModal(false)} />}
       </motion.div>
     </>
   );
