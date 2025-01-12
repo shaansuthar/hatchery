@@ -15,7 +15,7 @@ export const draggedItemRotationAtom = atom(0);
 
 export const avatarUrlAtom = atom(
   localStorage.getItem("avatarURL") ||
-    "https://models.readyplayer.me/64f0265b1db75f90dcfd9e2c.glb?meshlod=1&quality=medium"
+  "https://models.readyplayer.me/64f0265b1db75f90dcfd9e2c.glb?meshlod=1&quality=medium"
 );
 
 const PasswordInput = ({ onClose, onSuccess }) => {
@@ -148,6 +148,90 @@ const CodeInterfaceModal = ({ onClose }) => {
       </div>
     </div>
   );
+};  
+
+function embedMarkdown(contents) {
+  // Escape the contents to prevent issues with special characters
+  const escapedContents = contents.replace(/\\/g, '\\\\') // Escape backslashes
+                                   .replace(/`/g, '\\`'); // Escape backticks
+  
+  sdk.embedProject('stackBlitz-embed-marketing',
+    {
+      title: 'Marketing Requirements',
+      description: 'Marketing requirements for the project',
+      template: 'html',
+      files: {
+        'index.html': `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embed Markdown in HTML</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div id="markdown-container">
+    <!-- Markdown content will be rendered here -->
+  </div>
+
+  <script>
+    const markdownContent = \`${escapedContents}\`;
+    document.getElementById('markdown-container').innerHTML = marked.parse(markdownContent);
+  </script>
+</body>
+</html>`
+      }
+    },
+    {
+      openFile: 'index.html',
+      view: 'preview'
+    }
+  );
+}
+
+
+const MarketingInterfaceModal = ({ onClose, marketingRequirements }) => {
+  useEffect(() => {
+    embedMarkdown(marketingRequirements);
+  }, []);
+
+  return (
+    <div className="fixed z-20 grid place-items-center w-full h-full top-0 left-0">
+      <div
+        className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"
+        onClick={onClose}
+      ></div>
+      <div className="bg-white rounded-lg shadow-lg p-4 z-20 max-w-4xl w-full h-[80vh]">
+        <div className="flex justify-between items-center mb-4">
+          <p className="text-lg font-bold">Code Editor</p>
+          <button
+            className="text-gray-500 hover:text-gray-700"
+            onClick={onClose}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <div className="h-[calc(100%-4rem)]">
+          <div id="stackBlitz-embed-marketing" className="w-full h-full">
+            <p>Loading editor...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export const UI = () => {
@@ -166,6 +250,8 @@ export const UI = () => {
   const [chatHistory, setChatHistory] = useState([]);
   const [showChatHistory, setShowChatHistory] = useState(false);
   const [showCodeInterfaceModal, setShowCodeInterfaceModal] = useState(false);
+  const [showMarketingInterfaceModal, setShowMarketingInterfaceModal] = useState(false);
+  const [marketingRequirements, setMarketingRequirements] = useState("");
 
   const leaveRoom = () => {
     socket.emit("leaveRoom");
@@ -187,6 +273,16 @@ export const UI = () => {
       setChatMessage("");
     }
   };
+
+  useEffect(() => {
+    socket.on("marketingRequirementsUpdate", (content) => {
+      setMarketingRequirements(content);
+    });
+
+    return () => {
+      socket.off("marketingRequirementsUpdate");
+    };
+  }, []);
 
   return (
     <>
@@ -493,26 +589,51 @@ export const UI = () => {
               </svg>
             </button>
 
-            {/* New Button */}
-            <button
-              className="fixed top-20 right-4 p-4 rounded-full bg-slate-500 text-white drop-shadow-md cursor-pointer hover:bg-slate-800 transition-colors"
-              onClick={() => setShowCodeInterfaceModal(true)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
+            {/* Marketing Requirements Button */}
+            {roomID == 2 && (
+              <button
+                className="fixed top-20 right-4 p-4 rounded-full bg-slate-500 text-white drop-shadow-md cursor-pointer hover:bg-slate-800 transition-colors"
+                onClick={() => setShowMarketingInterfaceModal(true)}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
-                />
-              </svg>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15"
+                  />
+                </svg>
+              </button>
+            )}
+
+            {/* StackBlitz Button */}
+            {roomID == 3 && (
+              <button
+                className="fixed top-20 right-4 p-4 rounded-full bg-slate-500 text-white drop-shadow-md cursor-pointer hover:bg-slate-800 transition-colors"
+                onClick={() => setShowCodeInterfaceModal(true)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15"
+                  />
+                </svg>
+              </button>
+            )}
           </>
         )}
 
@@ -524,7 +645,14 @@ export const UI = () => {
           />
         )}
 
-        {/* Add the new modal */}
+        {showMarketingInterfaceModal && (
+          <MarketingInterfaceModal 
+            onClose={() => setShowMarketingInterfaceModal(false)} 
+            marketingRequirements={marketingRequirements}
+          />
+        )}
+          
+        {/* Add the code modal */}
         {showCodeInterfaceModal && <CodeInterfaceModal onClose={() => setShowCodeInterfaceModal(false)} />}
       </motion.div>
     </>

@@ -1,6 +1,8 @@
 import fs from "fs";
 import pathfinding from "pathfinding";
 import { Server } from "socket.io";
+import path from "path";
+import { exec } from "child_process";
 
 const origin = process.env.CLIENT_URL || "http://localhost:5173";
 const io = new Server({
@@ -98,7 +100,7 @@ const generateRandomPosition = (room) => {
     const x = Math.floor(Math.random() * room.size[0] * room.gridDivision);
     const y = Math.floor(Math.random() * room.size[1] * room.gridDivision);
     if (room.grid.isWalkableAt(x, y)) {
-      return [x, y];f
+      return [x, y];
     }
   }
 };
@@ -132,10 +134,6 @@ io.on("connection", (socket) => {
         avatarUrl: opts.avatarUrl,
       };
       room.characters.push(character);
-
-      // WILLIAM TESTING
-      
-      // END WILLIAM TESTING
 
       socket.emit("roomJoined", {
         map: {
@@ -200,6 +198,21 @@ io.on("connection", (socket) => {
         id: socket.id,
         message,
       });
+      
+      
+      fs.writeFile('../agents/idea.txt', message, (err) => {
+        if (err) {
+          console.error('Error writing to file:', err);
+        }
+      });
+
+      exec('cd ../agents && crewai run', (err, stdout, stderr) => {
+        if (err) {
+          console.error('Error executing command:', err);
+          return;
+        }
+        console.log('Command output:', stdout);
+      });
     });
 
     socket.on("passwordCheck", (password) => {
@@ -245,6 +258,29 @@ io.on("connection", (socket) => {
         );
         onRoomUpdate();
         room = null;
+      }
+    });
+
+    // Function to read and send markdown content
+    const sendMarketingRequirements = () => {
+      //const markdownPath = path.join(__dirname, '../agents/src/agents/simulations/prod/requirements.md');
+
+      fs.readFile('../agents/src/agents/simulations/prod/marketing_requirements.md', 'utf8', (err, data) => {
+        if (err) {
+          console.error('Error reading markdown file:', err);
+          return;
+        }
+        socket.emit("marketingRequirementsUpdate", data);
+      });
+    };
+
+    // Send initial content
+    sendMarketingRequirements();
+
+    // Optional: Set up file watcher to update content when file changes
+    fs.watch('../agents/src/agents/simulations/prod/marketing_requirements.md', (eventType, filename) => {
+      if (eventType === 'change') {
+        sendMarketingRequirements();
       }
     });
   } catch (ex) {

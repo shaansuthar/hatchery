@@ -83,7 +83,7 @@ class MarketingTasks():
             config=self.tasks_config["software_requirements"],
             agent=agent,
             context=context,
-            output_file=f"src/agents/simulations/{now}/software_requirements.md",
+            output_file=f"src/agents/simulations/{now}/marketing_requirements.md",
         )
 
     def coding_task(self, agent, context) -> Task:
