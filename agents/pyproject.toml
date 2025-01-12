@@ -7,7 +7,9 @@ requires-python = ">=3.10,<3.13"
 dependencies = [
     "crewai[tools]>=0.95.0,<1.0.0",
     "langchain-ollama",
-    "langchain-cohere"
+    "langchain-cohere",
+    "google-generativeai",
+    "crewai[tools]"
 ]
 
 [project.scripts]
