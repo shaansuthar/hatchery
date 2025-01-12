@@ -2,9 +2,9 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from agents.tools.search import SearchTools
 from langchain_ollama import ChatOllama
-from langchain_cohere import ChatCohere
+# from langchain_cohere import ChatCohere
 from datetime import datetime
-import google.generativeai as genai
+# import google.generativeai as genai
 import os
 from crewai_tools import DallETool
 
@@ -12,7 +12,6 @@ from crewai_tools import DallETool
 
 # llm = ChatCohere(temperature=0.3)
 # genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-# llm = 'gpt-4'
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 # Uncomment the following line to use an example of a custom tool
@@ -35,7 +34,7 @@ class AgentsCrew:
             allow_delegation=True,
             verbose=True,
             max_iter=5,
-            # llm=llm,
+            llm=llm,
         )
 
     @agent
@@ -46,7 +45,7 @@ class AgentsCrew:
             #   SearchTools.open_page,
             # ],
             verbose=True,
-            # llm=llm,
+            llm=llm,
             allow_delegation=False,
         )
 
@@ -56,7 +55,7 @@ class AgentsCrew:
             config=self.agents_config["creative_designer"],
             verbose=True,
             allow_delegation=False,
-            # llm=llm,
+            llm=llm,
         )
 
     @agent
@@ -64,7 +63,7 @@ class AgentsCrew:
         return Agent(
             config=self.agents_config["copywriter"],
             verbose=True,
-            # llm=llm,
+            llm=llm,
             allow_delegation=False,
         )
         

@@ -1,7 +1,23 @@
 from src.agents.twitter.twitter import TwitterBot
 import os
 import json
-from typing import Tuple, Union
+
+def trim_braces_content(input_string):
+    start = input_string.find('{')
+    end = input_string.rfind('}')
+    if start != -1 and end != -1 and start < end:
+        # Both `{` and `}` are found, and `{` comes before `}`
+        return input_string[start:end+1]
+    elif start != -1:
+        # Only `{` is found
+        return input_string[start:]
+    elif end != -1:
+        # Only `}` is found
+        return input_string[:end+1]
+    else:
+        # Neither `{` nor `}` is found
+        return input_string
+
 
 def post_tweet(task_output):
     API_KEY = os.getenv("API_KEY")
@@ -12,7 +28,7 @@ def post_tweet(task_output):
 
     try:
         # Attempt to parse the JSON
-        parsed_data = json.loads(task_output.raw)
+        parsed_data = json.loads(trim_braces_content(task_output.raw))
         caption = parsed_data.get("caption", "No caption provided")
         image_url = parsed_data.get("image_url", "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg")
         image_url = "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" # overwriting

@@ -1,1 +1,1 @@
-Create an application to sell dogs
+Create a payments system for electric car chargers that works universally with all cars.

@@ -76,7 +76,7 @@ move_character:
 
 generate_post:
   description: >
-    Create an engaging Instagram post for the week by writing a captivating and relevant caption and generating a URL for a visually appealing image that aligns with the strategic themes of the content calendar. The posts should engage the audience, embody the brand's voice, and encourage interaction. Both the captions and images should align with SEO best practices and incorporate the relevant keywords and hashtags contained in the content schedule.
+    Create an engaging Twitter post for the week by writing a captivating and relevant caption and generating a URL for a visually appealing image that aligns with the strategic themes of the content calendar. The posts should engage the audience, embody the brand's voice, and encourage interaction. Both the captions and images should align with SEO best practices and incorporate the relevant keywords and hashtags contained in the content schedule.
 
     This is the idea:
     <INPUT_IDEA>{idea}</INPUT_IDEA>

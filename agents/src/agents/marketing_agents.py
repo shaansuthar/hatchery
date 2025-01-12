@@ -1,5 +1,9 @@
 from crewai import Agent
 from crewai.project import CrewBase
+# from langchain_cohere import ChatCohere
+
+
+# llm = ChatCohere(temperature=0.3)
 
 @CrewBase
 class MarketingAgents():
@@ -82,4 +86,5 @@ class MarketingAgents():
             allow_delegation=False,
             verbose=True,
             max_iter=self.iterations,
+            # llm=llm,
         )
