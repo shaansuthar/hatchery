@@ -148,13 +148,13 @@ const CodeInterfaceModal = ({ onClose }) => {
       </div>
     </div>
   );
-};  
+};
 
 function embedMarkdown(contents) {
   // Escape the contents to prevent issues with special characters
   const escapedContents = contents.replace(/\\/g, '\\\\') // Escape backslashes
-                                   .replace(/`/g, '\\`'); // Escape backticks
-  
+    .replace(/`/g, '\\`'); // Escape backticks
+
   sdk.embedProject('stackBlitz-embed-marketing',
     {
       title: 'Marketing Requirements',
@@ -283,6 +283,58 @@ export const UI = () => {
       socket.off("marketingRequirementsUpdate");
     };
   }, []);
+
+  // Movement Data Update
+  useEffect(() => {
+    const handleMovementDataUpdate = (data) => {
+      console.log("Received movement data:", data);
+
+      if (roomID === 1 && data?.Movement) {  // Only handle movement in CEO's room
+        // Convert grid coordinates to match game's coordinate system
+        const targetX = data.Movement.x; // Multiply by gridDivision (2)
+        const targetY = data.Movement.y;
+
+        // Emit move event specifically for CEO
+        socket.emit("move",
+          [8, 11],  // CEO's starting position from default.json
+          [targetX, targetY]   // Target position from movement.json
+        );
+
+        // Handle any CEO messages if needed
+        if (data.Marketing?.Speech) {
+          socket.emit("ceoChatMessage", data.Marketing.Speech);
+        }
+      }
+    };
+
+    socket.on("movementDataUpdate", handleMovementDataUpdate);
+
+    return () => {
+      socket.off("movementDataUpdate", handleMovementDataUpdate);
+    };
+  }, [roomID]);
+
+  // Player Chat Message
+  useEffect(() => {
+    const handlePlayerChatMessage = (data) => {
+      if (data.id !== socket.id) {
+        const sender = data.id === "ceo" ? "CEO" : `User ${data.id.slice(0, 4)}`;
+        const newMessage = {
+          senderId: data.id,
+          sender: sender,
+          text: data.message,
+        };
+        setChatHistory((prev) => [...prev, newMessage]);
+      }
+    };
+
+    socket.on("playerChatMessage", handlePlayerChatMessage);
+
+    return () => {
+      socket.off("playerChatMessage", handlePlayerChatMessage);
+    };
+  }, []); // Empty dependency array since it doesn't rely on external state
+
 
   return (
     <>
@@ -646,12 +698,12 @@ export const UI = () => {
         )}
 
         {showMarketingInterfaceModal && (
-          <MarketingInterfaceModal 
-            onClose={() => setShowMarketingInterfaceModal(false)} 
+          <MarketingInterfaceModal
+            onClose={() => setShowMarketingInterfaceModal(false)}
             marketingRequirements={marketingRequirements}
           />
         )}
-          
+
         {/* Add the code modal */}
         {showCodeInterfaceModal && <CodeInterfaceModal onClose={() => setShowCodeInterfaceModal(false)} />}
       </motion.div>

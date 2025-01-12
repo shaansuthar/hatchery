@@ -68,6 +68,16 @@ export function Avatar({
   }, [animation, avatarUrl]);
 
   useEffect(() => {
+    function onPlayerMove(value) {
+      if (value.id === id) {
+        const path = [];
+        value.path?.forEach((gridPosition) => {
+          path.push(gridToVector3(gridPosition));
+        });
+        setPath(path);
+      }
+    }
+
     let chatMessageQueue = [];
     let isChatBubbleVisible = false;
 
@@ -82,8 +92,8 @@ export function Avatar({
           setTimeout(() => {
             isChatBubbleVisible = false;
             displayNextMessage();
-          }, 500); // Delay for fade-out animation (matches `transition-opacity` duration)
-        }, 3500); // Duration of message visibility
+          }, 500);
+        }, 3500);
       }
     }
 
@@ -97,9 +107,50 @@ export function Avatar({
       }
     }
 
+    function onMovementDataUpdate(data) {
+      // Handle CEO
+      if (id === "ceo" && data.Movement) {
+        onPlayerMove({
+          id: "ceo",
+          path: [[data.Movement.x, data.Movement.y]]
+        });
+      }
+
+      // Handle Marketing team
+      if (id.startsWith("marketing_") && data.Marketing) {
+        if (data.Marketing.Speech) {
+          onPlayerChatMessage({ id, message: data.Marketing.Speech });
+        }
+        if (data.Movement) {
+          onPlayerMove({
+            id,
+            path: [[data.Movement.x, data.Movement.y]]
+          });
+        }
+      }
+
+      // Handle Development team
+      if (id.startsWith("developer_") && data.Software) {
+        if (data.Software.Speech) {
+          onPlayerChatMessage({ id, message: data.Software.Speech });
+        }
+        if (data.Movement) {
+          onPlayerMove({
+            id,
+            path: [[data.Movement.x, data.Movement.y]]
+          });
+        }
+      }
+    }
+
+    socket.on("playerMove", onPlayerMove);
     socket.on("playerChatMessage", onPlayerChatMessage);
+    socket.on("movementDataUpdate", onMovementDataUpdate);
+
     return () => {
+      socket.off("playerMove", onPlayerMove);
       socket.off("playerChatMessage", onPlayerChatMessage);
+      socket.off("movementDataUpdate", onMovementDataUpdate);
     };
   }, [id]);
 
