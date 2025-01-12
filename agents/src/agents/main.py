@@ -35,28 +35,93 @@ def run():
     )
 
 
+    # # Instantiate the agents
+    # copywriter = agents.caption_writer()
+    # requirements_engineer = agents.requirements_engineer()
+    # manager = agents.manager()
+
+    # # Instantiate the tasks
+    # generate_requirements_task = tasks.generate_requirements_task(manager)
+    # move_character_task = tasks.move_character_task(manager, [generate_requirements_task])
+    # generate_post_task = tasks.generate_post_task(requirements_engineer, [generate_requirements_task])
+
+    # # Form the crew
+    # crew = Crew(
+    #     agents=[copywriter, manager, requirements_engineer],
+    #     tasks=[generate_requirements_task, move_character_task, generate_post_task],
+    #     process=Process.hierarchical,
+    #     manager_llm=OpenAIGPT4,
+    #     verbose=1
+    # )
+
+    # with open('default.json', 'r') as file:
+    #     office_map = json.load(file)
+
+    # office_map_string = json.dumps(office_map, indent=2)
+
+    # with open('idea.txt', 'r') as file:
+    #     idea = file.read()
+
+    # inputs = {
+    #     "map_data": office_map_string,
+    #     "idea": idea,
+    # }
+
     # Instantiate the agents
-    copywriter = agents.caption_writer()
-    requirements_engineer = agents.requirements_engineer()
-    manager = agents.manager()
+    caption_writer = agents.caption_writer()
+    product_manager = agents.product_manager()
+    marketing_director = agents.marketing_director()
+    software_director = agents.software_director()
+    software_developer = agents.software_developer()
 
     # Instantiate the tasks
-    generate_requirements_task = tasks.generate_requirements_task(manager)
-    move_character_task = tasks.move_character_task(manager, [generate_requirements_task])
-    generate_post_task = tasks.generate_post_task(requirements_engineer, [generate_requirements_task])
-
-    # Form the crew
-    crew = Crew(
-        agents=[copywriter, manager, requirements_engineer],
-        tasks=[generate_requirements_task, move_character_task, generate_post_task],
-        process=Process.hierarchical,
-        manager_llm=OpenAIGPT4,
-        verbose=1
+    move_character_task = tasks.move_character_task(
+        agent=marketing_director,
+        context=None
     )
 
+    marketing_requirements_task = tasks.marketing_requirements_task(product_manager, context=None)
+    software_requirements_task = tasks.software_requirements_task(product_manager, context=None)
+    
+    coding_task = tasks.coding_task(
+        agent=software_developer,
+        context=[software_requirements_task]
+    )
+    
+    generate_post_task = tasks.generate_post_task(
+        agent=caption_writer,
+        context=[marketing_requirements_task]
+    )
+    
+    # move_character_task = tasks.move_character_task(
+    #     agent=marketing_director,
+    #     context=[marketing_requirements_task, software_requirements_task]
+    # )
+
+    # Form the crew with agents and tasks
+    crew = Crew(
+        agents=[
+            caption_writer,
+            product_manager,
+            marketing_director,
+            software_director,
+            software_developer,
+        ],
+        tasks=[
+            marketing_requirements_task,
+            software_requirements_task,
+            coding_task,
+            generate_post_task,
+            move_character_task,
+        ],
+        process=Process.hierarchical,
+        manager_llm=OpenAIGPT4,
+        verbose=1,
+    )
+
+    # Load inputs
     with open('default.json', 'r') as file:
         office_map = json.load(file)
-
     office_map_string = json.dumps(office_map, indent=2)
 
     with open('idea.txt', 'r') as file:

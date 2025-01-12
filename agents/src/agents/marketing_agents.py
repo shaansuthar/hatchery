@@ -5,47 +5,72 @@ from crewai.project import CrewBase
 class MarketingAgents():
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
+    iterations = 2
 
-    def manager(self) -> Agent:
+    # def manager(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config["marketing_director"],
+    #         allow_delegation=True,
+    #         verbose=True,
+    #         max_iter=self.iterations,
+    #         # llm=llm,
+    #     )
+
+    # def caption_writer(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config["caption_writer"],
+    #         verbose=True,
+    #         # llm=llm,
+    #         allow_delegation=False,
+    #         max_iter=self.iterations,
+    #     )
+    
+    # def requirements_engineer(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config["requirements_engineer"],
+    #         verbose=True,
+    #         # llm=llm,
+    #         allow_delegation=False,
+    #         max_iter=self.iterations,
+    #     )
+
+    def marketing_director(self) -> Agent:
         return Agent(
             config=self.agents_config["marketing_director"],
             allow_delegation=True,
             verbose=True,
-            max_iter=5,
+            max_iter=self.iterations,
             # llm=llm,
         )
 
-    # def market_researcher(self) -> Agent:
-    #     return Agent(
-    #         config=self.agents_config["market_researcher"],
-    #         # tools=[
-    #         #   SearchTools.open_page,
-    #         # ],
-    #         verbose=True,
-    #         # llm=llm,
-    #         allow_delegation=False,
-    #     )
+    def software_director(self) -> Agent:
+        return Agent(
+            config=self.agents_config["software_director"],
+            allow_delegation=True,
+            verbose=True,
+            max_iter=self.iterations,
+        )
 
-    # def creative_designer(self) -> Agent:
-    #     return Agent(
-    #         config=self.agents_config["creative_designer"],
-    #         verbose=True,
-    #         allow_delegation=False,
-    #         # llm=llm,
-    #     )
+    def product_manager(self) -> Agent:
+        return Agent(
+            config=self.agents_config["product_manager"],
+            allow_delegation=True,
+            verbose=True,
+            max_iter=self.iterations,
+        )
 
     def caption_writer(self) -> Agent:
         return Agent(
             config=self.agents_config["caption_writer"],
-            verbose=True,
-            # llm=llm,
             allow_delegation=False,
+            verbose=True,
+            max_iter=self.iterations,
         )
-    
-    def requirements_engineer(self) -> Agent:
+
+    def software_developer(self) -> Agent:
         return Agent(
-            config=self.agents_config["requirements_engineer"],
-            verbose=True,
-            # llm=llm,
+            config=self.agents_config["software_developer"],
             allow_delegation=False,
+            verbose=True,
+            max_iter=self.iterations,
         )
