@@ -1,0 +1,16 @@
+{
+  "Technology": {
+    "Movement": {
+      "x": 10,
+      "y": -5
+    },
+    "Speech": "Explore the amazing features of our groundbreaking, sustainable solar-powered drone at the round meeting table! Let's revolutionize drone technology together. #TechForGood #Sustainable #Exploration #Innovation"
+  },
+  "Luxury Cosmetics": {
+    "Movement": {
+      "x": 0,
+      "y": 0
+    },
+    "Speech": "Get ready to embrace the future of beauty with our eco-friendly bamboo lipstick. Join me for a discussion on how our innovative products are pushing the boundaries of sustainable luxury. #LuxuryLiving #MadeToLast #EcoChic #Sustainability"
+  }
+}

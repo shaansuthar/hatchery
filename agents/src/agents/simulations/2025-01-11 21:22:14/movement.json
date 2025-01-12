@@ -1,0 +1,14 @@
+{
+  "Marketing": {
+    "ShouldTalkTo": true,
+    "Speech": "Our marketing focus is on targeting Engineering Students, Semiconductor Professionals, Tech Enthusiasts, and DIY Electronics Hobbyists. We are creating a brand identity that showcases technical competence, innovative learning methods, practicality, and specialization. We will continue to monitor the performance and engagement with our target segments and adjust our strategies accordingly."
+  },
+  "Software": {
+    "ShouldTalkTo": true,
+    "Speech": "The software requirements of the product include the creation of a structured learning path, the implementation of interactive modules and tutorials, the integration of RTL Development tools, and the development of an intuitive and engaging user interface. Additionally, the platform needs to be robust, secure, and cross-device compatible to provide a seamless learning experience for users. Communication and collaboration with the tech team is vital to ensure these requirements are understood and implemented effectively."
+  },
+  "Movement": {
+    "x": 10,
+    "y": 7
+  }
+}

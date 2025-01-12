@@ -4,10 +4,15 @@ from agents.tools.search import SearchTools
 from langchain_ollama import ChatOllama
 from langchain_cohere import ChatCohere
 from datetime import datetime
+import google.generativeai as genai
+import os
+from crewai_tools import DallETool
 
 # Llama3_2 = ChatOllama(model="llama3.2")
 
-llm = ChatCohere(temperature=0.3)
+# llm = ChatCohere(temperature=0.3)
+# genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# llm = 'gpt-4'
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 # Uncomment the following line to use an example of a custom tool
@@ -30,26 +35,20 @@ class AgentsCrew:
             allow_delegation=True,
             verbose=True,
             max_iter=5,
-            llm=llm,
+            # llm=llm,
         )
 
     @agent
     def market_researcher(self) -> Agent:
         return Agent(
             config=self.agents_config["market_researcher"],
-            tools=[
-              SearchTools.open_page,
-            ],
+            # tools=[
+            #   SearchTools.open_page,
+            # ],
             verbose=True,
-            llm=llm,
+            # llm=llm,
+            allow_delegation=False,
         )
-
-    # @agent
-    # def content_strategist(self) -> Agent:
-    #     return Agent(
-    #         config=self.agents_config["content_strategist"],
-    #         verbose=True
-    #     )
 
     @agent
     def creative_designer(self) -> Agent:
@@ -57,7 +56,7 @@ class AgentsCrew:
             config=self.agents_config["creative_designer"],
             verbose=True,
             allow_delegation=False,
-            llm=llm,
+            # llm=llm,
         )
 
     @agent
@@ -65,49 +64,56 @@ class AgentsCrew:
         return Agent(
             config=self.agents_config["copywriter"],
             verbose=True,
-            llm=llm,
+            # llm=llm,
+            allow_delegation=False,
         )
         
 
     @task
-    def market_research(self) -> Task:
+    def market_research(self, context) -> Task:
         return Task(
             config=self.tasks_config["market_research"],
             agent=self.market_researcher(),
+            context=context,
             output_file=f"src/agents/simulations/{now}/market_research.md",
         )
 
-    # @task
-    # def content_strategy_task(self) -> Task:
-    #     return Task(
-    #         config=self.tasks_config["content_strategy"],
-    #         agent=self.content_strategist(),
-    #     )
-
     @task
-    def creative_design_task(self) -> Task:
+    def creative_design_task(self, context) -> Task:
         return Task(
             config=self.tasks_config["creative_design"],
             agent=self.creative_designer(),
+            context=context,
             output_file=f"src/agents/simulations/{now}/visual-content.md",
+            tools=[DallETool()],
         )
 
     @task
-    def copywriting_task(self) -> Task:
+    def copywriting_task(self, context) -> Task:
         return Task(
             config=self.tasks_config["copywriting"],
             agent=self.copywriter(),
-            output_file=f"src/agents/simulations/{now}/copywriting.json",
+            context=context,
+            output_file=f"src/agents/simulations/{now}/copywriting.md",
         )
     
     @task
-    def move_character_task(self) -> Task:
+    def move_character_task(self, context) -> Task:
         return Task(
             config=self.tasks_config["move_character"],
             agent=self.manager(),
+            context=context,
             output_file=f"src/agents/simulations/{now}/movement.json",
         )
-
+    
+    @task
+    def generate_requirements_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["product_requirements"],
+            agent=self.manager(),
+            output_file=f"src/agents/simulations/{now}/requirements.md",
+        )
+    
     @crew
     def crew(self) -> Crew:
         """Creates the Agents crew"""
@@ -118,5 +124,4 @@ class AgentsCrew:
             verbose=1,
             # manager_llm=Llama3_2
             manager_agent=self.manager()
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
         )
