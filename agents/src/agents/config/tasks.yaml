@@ -25,6 +25,55 @@ move_character:
       }
     }
  
+# generate_post:
+#   description: >
+#     Create an engaging Instagram post for the week by writing a captivating and relevant caption and generating a URL for a visually appealing image that aligns with the strategic themes of the content calendar. The posts should engage the audience, embody the brand's voice, and encourage interaction. Both the captions and images should align with SEO best practices and incorporate the relevant keywords and hashtags contained in the content schedule.
+
+#     This is the idea:
+#     <INPUT_IDEA>{idea}</INPUT_IDEA>
+
+#     Consider the following guidelines when creating the post:
+#     - Keep the captions concise and engaging.
+#     - Include a call to action where appropriate.
+#     - Use relevant keywords and hashtags.
+#     - Ensure the captions align with the brand's voice and tone.
+#     - Generate a high-quality image URL that complements the caption and adheres to the brand's aesthetic.
+
+#     Here are some examples of captions and image descriptions:
+#     - Caption: "Hello everyone! :heart: We're excited to share our latest collection with you. Check out our website for more details. #newcollection #fashion #style"  
+#       Image URL: [Link to an image of a stylish clothing collection on a minimalist background]
+      
+#     - Caption: "Happy Monday! :sunflower: Start your week right with our delicious smoothies. Visit our store today! #smoothies #healthyliving #mondaymotivation"  
+#       Image URL: [Link to an image of colorful smoothies in a vibrant setting]
+      
+#     - Caption: "Feeling stressed? :massage: Treat yourself to a relaxing spa day. Book now and unwind in luxury. #spaday #relaxation #selfcare"  
+#       Image URL: [Link to an image of a serene spa environment with candles and towels]
+#   expected_output: >
+#     A document formatted as markdown, with several sections. Each section should include:
+#     - A captivating and relevant caption
+#     - Relevant hashtags and a call to action
+#     - A URL for a generated image that complements the caption and aligns with the brand's aesthetic. If you don't have DallE access, just put "Can't generate image".
+
+#     Example post:
+#     # Instagram Post: Semiconductor Chip Design Magic ✨🔬🚀
+
+#     🔍 Dive into the intricate world of semiconductor chip design where analog meets digital magic! 💡 Our chips seamlessly blend cutting-edge digital circuits with finely tuned analog components to power the technology of tomorrow. From transistor-level design to advanced signal processing, our team crafts every detail with precision. Join us in exploring the fusion of technology and creativity to shape the future! #ChipDesign #AnalogDigitalBlend #TechInnovation
+
+#     🌟 Don't miss out! Click the link in our bio to learn more about the magic behind semiconductor chip design and unlock your potential in this dynamic industry. 🔗💻 #LearnMore #UnlockYourPotential
+
+#     📸 Check out our visually stunning graphic showcasing the integration of analog and digital components in semiconductor chip design. Unleash your imagination as we take you on a journey through the technology of tomorrow! ✨ #TechArt #VisualAppeal
+
+#     Key Technical Highlights:
+#     1. Analog-Digital Integration: Optimizing performance and efficiency through harmonizing analog and digital components.
+#     2. Transistor-Level Precision: Attention to detail in transistor design for superior functionality and speed.
+#     3. Signal Processing Expertise: Advanced techniques ensuring optimal signal quality and integrity.
+#     4. Power Efficiency Solutions: Innovative strategies for energy-efficient technologies.
+#     5. Future-Ready Technology: Paving the way for technological advancements in diverse industries.
+
+#     Let the creativity and innovation flow as we explore the wonders of semiconductor chip design together! 🌐🛠
+
+#     ![Image](https://example.com/image)
+
 generate_post:
   description: >
     Create an engaging Instagram post for the week by writing a captivating and relevant caption and generating a URL for a visually appealing image that aligns with the strategic themes of the content calendar. The posts should engage the audience, embody the brand's voice, and encourage interaction. Both the captions and images should align with SEO best practices and incorporate the relevant keywords and hashtags contained in the content schedule.
@@ -41,38 +90,24 @@ generate_post:
 
     Here are some examples of captions and image descriptions:
     - Caption: "Hello everyone! :heart: We're excited to share our latest collection with you. Check out our website for more details. #newcollection #fashion #style"  
-      Image URL: [Link to an image of a stylish clothing collection on a minimalist background]
+      Image URL: "https://example.com/image1"
       
     - Caption: "Happy Monday! :sunflower: Start your week right with our delicious smoothies. Visit our store today! #smoothies #healthyliving #mondaymotivation"  
-      Image URL: [Link to an image of colorful smoothies in a vibrant setting]
+      Image URL: "https://example.com/image2"
       
     - Caption: "Feeling stressed? :massage: Treat yourself to a relaxing spa day. Book now and unwind in luxury. #spaday #relaxation #selfcare"  
-      Image URL: [Link to an image of a serene spa environment with candles and towels]
+      Image URL: "https://example.com/image3"
   expected_output: >
-    A document formatted as markdown, with several sections. Each section should include:
-    - A captivating and relevant caption
-    - Relevant hashtags and a call to action
-    - A URL for a generated image that complements the caption and aligns with the brand's aesthetic. If you don't have DallE access, just put "Can't generate image".
+    A JSON object containing:
+    - A `caption` key with a captivating and relevant caption as the value.
+    - An `image_url` key with a URL for a generated image that complements the caption and aligns with the brand's aesthetic. If no image can be generated, the value should be "Cannot generate image."
 
-    Example post:
-    # Instagram Post: Semiconductor Chip Design Magic ✨🔬🚀
+    Example output:
+    {
+      "caption": "Hello everyone! ❤️ We're excited to share our latest collection with you. Check out our website for more details. #newcollection #fashion #style",
+      "image_url": "https://example.com/image1"
+    }
 
-    🔍 Dive into the intricate world of semiconductor chip design where analog meets digital magic! 💡 Our chips seamlessly blend cutting-edge digital circuits with finely tuned analog components to power the technology of tomorrow. From transistor-level design to advanced signal processing, our team crafts every detail with precision. Join us in exploring the fusion of technology and creativity to shape the future! #ChipDesign #AnalogDigitalBlend #TechInnovation
-
-    🌟 Don't miss out! Click the link in our bio to learn more about the magic behind semiconductor chip design and unlock your potential in this dynamic industry. 🔗💻 #LearnMore #UnlockYourPotential
-
-    📸 Check out our visually stunning graphic showcasing the integration of analog and digital components in semiconductor chip design. Unleash your imagination as we take you on a journey through the technology of tomorrow! ✨ #TechArt #VisualAppeal
-
-    Key Technical Highlights:
-    1. Analog-Digital Integration: Optimizing performance and efficiency through harmonizing analog and digital components.
-    2. Transistor-Level Precision: Attention to detail in transistor design for superior functionality and speed.
-    3. Signal Processing Expertise: Advanced techniques ensuring optimal signal quality and integrity.
-    4. Power Efficiency Solutions: Innovative strategies for energy-efficient technologies.
-    5. Future-Ready Technology: Paving the way for technological advancements in diverse industries.
-
-    Let the creativity and innovation flow as we explore the wonders of semiconductor chip design together! 🌐🛠
-
-    ![Image](https://example.com/image)
 
 # product_requirements:
 #   description: >

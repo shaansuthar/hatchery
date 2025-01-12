@@ -1,14 +1,14 @@
 {
   "Marketing": {
     "ShouldTalkTo": true,
-    "Speech": "We should coordinate with the Marketing team to align our strategies for the upcoming campaign launch."
+    "Speech": "We should focus on targeting younger audiences for this campaign."
   },
   "Software": {
     "ShouldTalkTo": false,
-    "Speech": "No immediate updates are needed for the Software team's current module."
+    "Speech": "No further updates are required for this module at the moment."
   },
   "Movement": {
-    "x": 6,
+    "x": 5,
     "y": 5
   }
 }
