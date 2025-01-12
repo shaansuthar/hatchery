@@ -198,8 +198,8 @@ io.on("connection", (socket) => {
         id: socket.id,
         message,
       });
-      
-      
+
+
       fs.writeFile('../agents/idea.txt', message, (err) => {
         if (err) {
           console.error('Error writing to file:', err);
@@ -261,10 +261,35 @@ io.on("connection", (socket) => {
       }
     });
 
+    // Function to read and send JSON content
+    const sendMovementData = () => {
+      fs.readFile('../agents/src/agents/simulations/prod/movement.json', 'utf8', (err, data) => {
+        if (err) {
+          console.error('Error reading JSON file:', err);
+          return;
+        }
+        try {
+          const jsonData = JSON.parse(data);
+          socket.emit("movementDataUpdate", jsonData);
+        } catch (parseErr) {
+          console.error('Error parsing JSON file:', parseErr);
+        }
+      });
+    };
+
+    // Send initial content
+    sendMovementData();
+
+    // Optional: Set up file watcher to update content when file changes
+    fs.watch('../agents/src/agents/simulations/prod/movement.json', (eventType) => {
+      if (eventType === 'change') {
+        sendMovementData();
+        console.log("update to movement.json");
+      }
+    });
+
     // Function to read and send markdown content
     const sendMarketingRequirements = () => {
-      //const markdownPath = path.join(__dirname, '../agents/src/agents/simulations/prod/requirements.md');
-
       fs.readFile('../agents/src/agents/simulations/prod/marketing_requirements.md', 'utf8', (err, data) => {
         if (err) {
           console.error('Error reading markdown file:', err);
@@ -278,10 +303,17 @@ io.on("connection", (socket) => {
     sendMarketingRequirements();
 
     // Optional: Set up file watcher to update content when file changes
-    fs.watch('../agents/src/agents/simulations/prod/marketing_requirements.md', (eventType, filename) => {
+    fs.watch('../agents/src/agents/simulations/prod/marketing_requirements.md', (eventType) => {
       if (eventType === 'change') {
         sendMarketingRequirements();
       }
+    });
+
+    socket.on("ceoChatMessage", (message) => {
+      io.to(room.id).emit("playerChatMessage", {
+        id: "ceo",
+        message: message
+      });
     });
   } catch (ex) {
     console.log(ex); // Big try catch to avoid crashing the server (best would be to handle all errors properly...)

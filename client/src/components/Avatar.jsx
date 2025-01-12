@@ -29,9 +29,7 @@ export function Avatar({
 
   const group = useRef();
   const { scene } = useGLTF(avatarUrl);
-  // Skinned meshes cannot be re-used in threejs without cloning them
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
-  // useGraph creates two flat object collections for nodes and materials
   const { nodes } = useGraph(clone);
 
   const { animations: walkAnimation } = useGLTF("/animations/M_Walk_001.glb");
@@ -70,39 +68,37 @@ export function Avatar({
   }, [animation, avatarUrl]);
 
   useEffect(() => {
-    function onPlayerDance(value) {
-      if (value.id === id) {
-        setIsDancing(true);
-      }
-    }
-    function onPlayerMove(value) {
-      if (value.id === id) {
-        const path = [];
-        value.path?.forEach((gridPosition) => {
-          path.push(gridToVector3(gridPosition));
-        });
-        setPath(path);
+    let chatMessageQueue = [];
+    let isChatBubbleVisible = false;
+
+    function displayNextMessage() {
+      if (chatMessageQueue.length > 0) {
+        const nextMessage = chatMessageQueue.shift();
+        setChatMessage(nextMessage);
+        setShowChatBubble(true);
+
+        setTimeout(() => {
+          setShowChatBubble(false);
+          setTimeout(() => {
+            isChatBubbleVisible = false;
+            displayNextMessage();
+          }, 500); // Delay for fade-out animation (matches `transition-opacity` duration)
+        }, 3500); // Duration of message visibility
       }
     }
 
-    let chatMessageBubbleTimeout;
     function onPlayerChatMessage(value) {
       if (value.id === id) {
-        setChatMessage(value.message);
-        clearTimeout(chatMessageBubbleTimeout);
-        setShowChatBubble(true);
-        chatMessageBubbleTimeout = setTimeout(() => {
-          setShowChatBubble(false);
-        }, 3500);
+        chatMessageQueue.push(value.message);
+        if (!isChatBubbleVisible) {
+          isChatBubbleVisible = true;
+          displayNextMessage();
+        }
       }
     }
 
-    socket.on("playerMove", onPlayerMove);
-    socket.on("playerDance", onPlayerDance);
     socket.on("playerChatMessage", onPlayerChatMessage);
     return () => {
-      socket.off("playerDance", onPlayerDance);
-      socket.off("playerMove", onPlayerMove);
       socket.off("playerChatMessage", onPlayerChatMessage);
     };
   }, [id]);
@@ -144,9 +140,8 @@ export function Avatar({
       <Html position-y={2}>
         <div className="w-60 max-w-full">
           <p
-            className={`absolute max-w-full text-center break-words -translate-y-full p-2 px-4 -translate-x-1/2 rounded-lg bg-white bg-opacity-40 backdrop-blur-sm text-black transition-opacity duration-500 ${
-              showChatBubble ? "" : "opacity-0"
-            }`}
+            className={`absolute max-w-full text-center break-words -translate-y-full p-2 px-4 -translate-x-1/2 rounded-lg bg-white bg-opacity-40 backdrop-blur-sm text-black transition-opacity duration-500 ${showChatBubble ? "" : "opacity-0"
+              }`}
           >
             {chatMessage}
           </p>
@@ -178,7 +173,7 @@ export function Avatar({
 
 useGLTF.preload(
   localStorage.getItem("avatarURL") ||
-    "https://models.readyplayer.me/64f0265b1db75f90dcfd9e2c.glb?meshlod=1&quality=medium"
+  "https://models.readyplayer.me/64f0265b1db75f90dcfd9e2c.glb?meshlod=1&quality=medium"
 );
 useGLTF.preload("/animations/M_Walk_001.glb");
 useGLTF.preload("/animations/M_Standing_Idle_001.glb");
