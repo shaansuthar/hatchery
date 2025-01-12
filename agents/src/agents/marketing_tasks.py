@@ -91,5 +91,5 @@ class MarketingTasks():
             config=self.tasks_config["coding"],
             agent=agent,
             context=context,
-            output_file=f"src/agents/simulations/{now}/coding_plan.md",
+            output_file=f"src/agents/simulations/{now}/coding_plan.py",
         )

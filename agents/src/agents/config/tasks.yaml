@@ -140,20 +140,18 @@ software_requirements:
 
 coding:
   description: >
-    Use the input idea to create a coding plan or prototype that outlines the technical approach to building the software product. This includes designing the architecture, choosing technologies, and writing initial code snippets or pseudocode.
+    Use the input idea to code up the product in Python. This includes designing the architecture, choosing appropriate Python libraries or frameworks, and writing the necessary code to implement the core features of the software product. Ensure the implementation is functional and aligns with the given requirements.
 
     Input idea:
     <INPUT_IDEA>{idea}</INPUT_IDEA>
 
     Consider:
     - Best technologies and frameworks for implementation
-    - High-level architecture and component breakdown
-    - Code examples or pseudocode for critical parts
-    - Potential challenges and solutions
+    - High-level architecture
 
   expected_output: >
-    A code file and a outlining the coding plan or prototype. It should include:
-    - Architectural design
-    - Technology stack
-    - Code examples or pseudocode
-    - Steps for implementation or further prototyping
+    A Python code file that implements the product based on the given input idea. The file should include:
+    - Fully functional Python code implementing the core features of the product
+    - Clear, well-organized code structure
+    - Appropriate comments and documentation for clarity and maintainability
+    - Necessary imports and dependencies

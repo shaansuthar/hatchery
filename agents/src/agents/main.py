@@ -73,15 +73,16 @@ def run():
     marketing_director = agents.marketing_director()
     software_director = agents.software_director()
     software_developer = agents.software_developer()
+    requirements_engineer = agents.requirements_engineer()
 
     # Instantiate the tasks
     move_character_task = tasks.move_character_task(
-        agent=marketing_director,
+        agent=product_manager,
         context=None
     )
 
-    marketing_requirements_task = tasks.marketing_requirements_task(product_manager, context=None)
-    software_requirements_task = tasks.software_requirements_task(product_manager, context=None)
+    marketing_requirements_task = tasks.marketing_requirements_task(marketing_director, context=None)
+    software_requirements_task = tasks.software_requirements_task(software_director, context=None)
     
     coding_task = tasks.coding_task(
         agent=software_developer,
@@ -106,13 +107,14 @@ def run():
             marketing_director,
             software_director,
             software_developer,
+            requirements_engineer,
         ],
         tasks=[
+            move_character_task,
             marketing_requirements_task,
             software_requirements_task,
             coding_task,
             generate_post_task,
-            move_character_task,
         ],
         process=Process.hierarchical,
         manager_llm=OpenAIGPT4,
