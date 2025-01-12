@@ -5,6 +5,9 @@ import { AvatarCreator } from "@readyplayerme/react-avatar-creator";
 import { motion } from "framer-motion";
 import { roomItemsAtom } from "./Room";
 import { roomIDAtom, socket } from "./SocketManager";
+import sdk from '@stackblitz/sdk';
+
+
 export const buildModeAtom = atom(false);
 export const shopModeAtom = atom(false);
 export const draggedItemAtom = atom(null);
@@ -97,7 +100,17 @@ const ChatHistoryModal = ({ onClose, chatHistory }) => {
   );
 };
 
+function embedProject() {
+  sdk.embedProjectId('stackBlitz-embed', 'css-custom-prop-color-values', {
+    openFile: 'index.ts',
+  });
+}
+
 const CodeInterfaceModal = ({ onClose }) => {
+  useEffect(() => {
+    embedProject();
+  }, []);
+
   return (
     <div className="fixed z-20 grid place-items-center w-full h-full top-0 left-0">
       <div
@@ -106,7 +119,7 @@ const CodeInterfaceModal = ({ onClose }) => {
       ></div>
       <div className="bg-white rounded-lg shadow-lg p-4 z-20 max-w-4xl w-full h-[80vh]">
         <div className="flex justify-between items-center mb-4">
-          <p className="text-lg font-bold">Google Search</p>
+          <p className="text-lg font-bold">Code Editor</p>
           <button
             className="text-gray-500 hover:text-gray-700"
             onClick={onClose}
@@ -128,12 +141,9 @@ const CodeInterfaceModal = ({ onClose }) => {
           </button>
         </div>
         <div className="h-[calc(100%-4rem)]">
-          <iframe
-            src="https://37d39694.bolt-diy-bxk.pages.dev/"
-            className="w-full h-full rounded-lg"
-            title="Code Interface"
-            sandbox="allow-same-origin allow-scripts allow-forms"
-          />
+          <div id="stackBlitz-embed" className="w-full h-full">
+            <p>Loading editor...</p>
+          </div>
         </div>
       </div>
     </div>
