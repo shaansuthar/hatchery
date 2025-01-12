@@ -9,7 +9,8 @@ dependencies = [
     "langchain-ollama",
     "langchain-cohere",
     "google-generativeai",
-    "crewai[tools]"
+    "crewai[tools]",
+    "tweepy"
 ]
 
 [project.scripts]

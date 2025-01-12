@@ -10,6 +10,7 @@ from crewai import Crew, Process
 from langchain_openai import ChatOpenAI
 from src.agents.marketing_agents import MarketingAgents
 from src.agents.marketing_tasks import MarketingTasks
+from src.agents.callbacks import post_tweet
 
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
@@ -91,7 +92,8 @@ def run():
     
     generate_post_task = tasks.generate_post_task(
         agent=caption_writer,
-        context=[marketing_requirements_task]
+        context=[marketing_requirements_task],
+        callback_function=post_tweet
     )
     
     # move_character_task = tasks.move_character_task(

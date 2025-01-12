@@ -62,12 +62,13 @@ class MarketingTasks():
             output_file=f"src/agents/simulations/{now}/movement.json",
         )
 
-    def generate_post_task(self, agent, context) -> Task:
+    def generate_post_task(self, agent, context, callback_function) -> Task:
         return Task(
             config=self.tasks_config["generate_post"],
             agent=agent,
             context=context,
             output_file=f"src/agents/simulations/{now}/generate_post.md",
+            callback=callback_function
         )
 
     def marketing_requirements_task(self, agent, context) -> Task:
