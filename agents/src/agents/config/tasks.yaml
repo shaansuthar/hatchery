@@ -1,19 +1,3 @@
-# marketing_director:
-#   description: >
-#     Oversee and manage the execution of Instagram marketing campaigns, ensuring alignment with the broader marketing strategy and business goals. Delegate tasks to the team, ensuring the right expertise is applied to each project. Regularly evaluate the quality of the team’s work, assess whether it meets the intended goals, and communicate outcomes and strategic recommendations back to the CEO.
- 
-#     Here are some examples of tasks you may delegate:  
-#     - Assigning the task of identifying trending hashtags, key influencers, and competitive landscape research to the Market Researcher.  
-#     - Delegating the creation of visually engaging content to the Creative Designer, ensuring it aligns with the brand's tone and campaign goals.  
-#     - Assigning the task of writing compelling copy that resonates with the target audience and incorporates trending hashtags to the Copywriter.  
- 
-#   expected_output: >
-#     A detailed strategic report outlining the team's progress, any challenges, and whether the deliverables align with the CEO's expectations. The report should include:
-#     - Updates on each team member's output (Market Researcher, Creative Designer, Copywriter).
-#     - A summary of any course corrections needed or adjustments to the original strategy.
-#     - Clear and concise feedback for the team, ensuring they stay on track to meet campaign objectives.
-#     - A status update to the CEO, providing transparency into the team's performance, any potential risks, and next steps to ensure continued success.
-
 move_character:
   description: >
     Analyze the current office map data and determine the optimal next move for the character. Based on the given map data, decide where the character should move, considering obstacles, furniture, and people within the space. The objective is to identify a destination that is both logically relevant to the current context (e.g., for a task or interaction) and is achievable based on the layout of the office.
@@ -35,44 +19,49 @@ move_character:
       "Software": {
         "ShouldTalkTo": false,
         "Speech": "No further updates are required for this module at the moment."
-      },
-      "Movement": {
-        "x": 10,
-        "y": -5
       }
     }
 
 
-market_research:
-  description: >
-    Research and analyze the latest market trends, consumer behaviors, and competitor strategies relevant to launching a new product. Identify insights on emerging industry practices, target audience preferences, and innovative marketing approaches. Develop actionable recommendations based on the findings to shape a successful product launch strategy.
+# market_research:
+#   description: >
+#     Research and analyze the latest market trends, consumer behaviors, and competitor strategies relevant to launching a new product. Identify insights on emerging industry practices, target audience preferences, and innovative marketing approaches. Develop actionable recommendations based on the findings to shape a successful product launch strategy.
     
-  expected_output: >
-    A report in markdown with the most relevant information that you found, including relevant hashtags for this week's content, trending strategies, design elements, and content themes influencing product launches, clear recommendations for marketing and design teams to implement and all other information that could be useful to the team working on content creation. Your feedback should align with the product's target audience and market segment to optimize its launch impact.
+#   expected_output: >
+#     A report in markdown with the most relevant information that you found, including relevant hashtags for this week's content, trending strategies, design elements, and content themes influencing product launches, clear recommendations for marketing and design teams to implement and all other information that could be useful to the team working on content creation. Your feedback should align with the product's target audience and market segment to optimize its launch impact.
  
-creative_design:
-  description: >
-    Based on the visual content needs for each campaign, design striking, brand-consistent graphics and images for Instagram and other marketing channels. Develop detailed image descriptions that clearly outline the visual elements for each design. Each description must specify key components such as color palettes, objects, composition, and mood, ensuring clarity and alignment with brand identity.
+# creative_design:
+#   description: >
+#     Based on the visual content needs for each campaign, design striking, brand-consistent graphics and images for Instagram and other marketing channels. Develop detailed image descriptions that clearly outline the visual elements for each design. Each description must specify key components such as color palettes, objects, composition, and mood, ensuring clarity and alignment with brand identity.
   
-  expected_output: >
-    Only a URL to the image generated by DallE
+#   expected_output: >
+#     Only a URL to the image generated by DallE
  
-copywriting:
+generate_post:
   description: >
-    Write captivating and relevant copy for each Instagram post of the week, aligning to the strategic themes of the content calendar. The copy should engage the audience, embody the brand's voice, and encourage interaction. The copy should also be SEO-friendly and incorporate the relevant keywords and hashtags contained in the content schedule.
- 
-    Consider the following guidelines when writing the copy:
-    - Keep the copy concise and engaging.
+    Create engaging Instagram posts for the week by writing captivating and relevant captions and generating a URL for a visually appealing image that aligns with the strategic themes of the content calendar. The posts should engage the audience, embody the brand's voice, and encourage interaction. Both the captions and images should align with SEO best practices and incorporate the relevant keywords and hashtags contained in the content schedule.
+
+    Consider the following guidelines when creating the post:
+    - Keep the captions concise and engaging.
     - Include a call to action where appropriate.
     - Use relevant keywords and hashtags.
-    - Ensure the copy aligns with the brand's voice and tone.
- 
-    Here are some examples of the copy:
-    - "Hello everyone! :heart: We're excited to share our latest collection with you. Check out our website for more details. #newcollection #fashion #style"
-    - "Happy Monday! :sunflower: Start your week right with our delicious smoothies. Visit our store today! #smoothies #healthyliving #mondaymotivation"
-    - "Feeling stressed? :massage: Treat yourself to a relaxing spa day. Book now and unwind in luxury. #spaday #relaxation #selfcare"
+    - Ensure the captions align with the brand's voice and tone.
+    - Generate a high-quality image URL that complements the caption and adheres to the brand’s aesthetic.
+
+    Here are some examples of captions and image descriptions:
+    - Caption: "Hello everyone! :heart: We're excited to share our latest collection with you. Check out our website for more details. #newcollection #fashion #style"  
+      Image URL: [Link to an image of a stylish clothing collection on a minimalist background]
+      
+    - Caption: "Happy Monday! :sunflower: Start your week right with our delicious smoothies. Visit our store today! #smoothies #healthyliving #mondaymotivation"  
+      Image URL: [Link to an image of colorful smoothies in a vibrant setting]
+      
+    - Caption: "Feeling stressed? :massage: Treat yourself to a relaxing spa day. Book now and unwind in luxury. #spaday #relaxation #selfcare"  
+      Image URL: [Link to an image of a serene spa environment with candles and towels]
   expected_output: >
-    A document formatted as markdown, with several sections. Each section should contain the copy for a single Instagram post, along with the relevant hashtags and calls to action. The copy should be engaging, on-brand, and aligned with the content calendar.
+    A document formatted as markdown, with several sections. Each section should include:
+    - A captivating and relevant caption
+    - Relevant hashtags and a call to action
+    - A URL for a generated image that complements the caption and aligns with the brand's aesthetic. If you don't have DallE access, just put "Can't generate image".
 
 product_requirements:
   description: >
@@ -94,7 +83,6 @@ product_requirements:
     - **Software Requirements**: Comprehensive list of core functionalities, user experience goals, and technical requirements.
 
     Example output:
-    ```markdown
     # Product Requirements
 
     ## Marketing Requirements
@@ -106,107 +94,3 @@ product_requirements:
     - **Core Features**: Task management, calendar integration, and real-time collaboration.
     - **User Experience Goals**: Intuitive interface, quick onboarding, and responsive design.
     - **Technical Requirements**: Must support desktop and mobile platforms, include API integrations with third-party services, and ensure data security compliance.
-    ```
-
-
-# delegate_tasks:
-#   description: >
-#     Analyze the current market context and the proposed idea to create a comprehensive delegation plan for the marketing team. The objective is to break down the idea into actionable tasks and assign responsibilities effectively, ensuring alignment with the broader marketing strategy.
-
-#     Current market context:
-#     <CURRENT_MARKET_CONTEXT>{current_market_context}</CURRENT_MARKET_CONTEXT>
-
-#     Idea for the campaign or initiative:
-#     <IDEA>{idea}</IDEA>
-
-#     Focus areas for delegation include, but are not limited to:
-#     - Content creation (e.g., social media posts, blogs, email marketing).
-#     - Audience engagement strategies (e.g., community building, responding to inquiries).
-#     - Analytics and reporting (e.g., tracking campaign performance, generating insights).
-#     - Collaboration with other departments if necessary.
-
-#   expected_output: >
-#     A detailed delegation plan outlining:
-#     - The specific tasks required to implement the idea.
-#     - The person or team assigned to each task.
-#     - A timeline for each task's completion.
-#     - Any tools, resources, or additional support needed for successful execution.
-
-#     The final plan should ensure all team members are aware of their roles and responsibilities, with clear goals and deadlines to keep the campaign or initiative on track.
-
-# market_research:
-#   description: >
-#     Investigate the latest trends, hashtags, and competitor activities on Instagram specific to the industry of this Instagram account. Focus on gathering data that reveals what content performs well in the current year, identifying patterns, preferences, and emerging trends. 
-
-# # Current date: {current_date}
-
-# # Description of the instagram account for which you are doing this research: 
-# # <INSTAGRAM_ACCOUNT_DESCRIPTION>{instagram_description}</INSTAGRAM_ACCOUNT_DESCRIPTION>
-
-# # Find the most relevant topics, hashtags and trends to use the the posts for next week. The focus of the following week is the following: 
-# # <NEXT_WEEK_CONTENT>{topic_of_the_week}</NEXT_WEEK_CONTENT>
-
-#   expected_output: >
-#     A report with the most relevant information that you found, including relevant hashtags for this week's content and all other information that could be useful to the team working on content creation.
-
-# content_strategy:
-#   description: >
-#     Based on the market research findings, develop a comprehensive content calendar for a week. The calendar should specify the theme for each day of the week (from Monday to Sunday) where some content should be posted, and preliminary ideas for post content. For now, focus on a three-day content calendar, including the most relevant keywords and hashtags to use in each post.
-#   expected_output: >
-#     A detailed week-long content calendar, formatted as markdown, that includes days of the week (from monday to friday), a brief overview of content ideas, and the most relevant keywords and hashtags to use in each post. Ensure the calendar aligns with the identified trends and audience preferences.
-
-# visual_content_creation:
-#   description: >
-#     Based on the content strategy for each Instagram post, create the the visual art that will be published on Instagram on each day of the week. To do that, you will need to create a detailed description of the image that you will use for each day. 
-#     The descriptions that you will use need to be detailed, yet concise, and should include the main elements that should be present in the image. Describe the colors, the objects, the mood, and any other relevant information that you think is important for the image to be created.
-
-#     Here are some examples of the descriptions that you could use:
-#     - A realistic image of a living room with a modern design. The room should have a large window with a view of a cityscape. The color palette should be neutral, with a pop of color in the form of a red sofa. The room should be well-lit, with a cozy and inviting atmosphere.
-#     - A minimalist image of a desk with a laptop, a notebook, and a cup of coffee. The desk should be made of light wood, and the background should be a plain white wall. The image should convey a sense of focus and productivity.
-#     - A vibrant image of a tropical beach at sunset. The beach should be deserted, with palm trees swaying in the wind. The sky should be a mix of warm colors, with the sun setting on the horizon. The image should evoke a sense of relaxation and tranquility.
-
-#   expected_output: >
-#     A markdown document with detailed descriptions of the images that will be used for each Instagram post of the week. Each description should be concise and include the main elements, colors, mood, and any other relevant information that will guide the creation of the image. The descriptions should align with the content calendar and the identified trends.
-
-# copywriting:
-#   description: >
-#     Write captivating and relevant copy for each Instagram post of the week, aligning to the strategic themes of the content calendar. The copy should engage the audience, embody the brand's voice, and encourage interaction. The copy should also be SEO-friendly and incorporate the relevant keywords and hashtags contained in the content schedule. 
-
-#     Consider the following guidelines when writing the copy:
-#     - Keep the copy concise and engaging.
-#     - Include a call to action where appropriate.
-#     - Use relevant keywords and hashtags.
-#     - Ensure the copy aligns with the brand's voice and tone.
-
-#     Here are some examples of the copy that you could use:
-#     - "Hello everyone! :heart: We're excited to share our latest collection with you. Check out our website for more details. #newcollection #fashion #style"
-#     - "Happy Monday! :sunflower: Start your week right with our delicious smoothies. Visit our store today! #smoothies #healthyliving #mondaymotivation"
-#     - "Feeling stressed? :massage: Treat yourself to a relaxing spa day. Book now and unwind in luxury. #spaday #relaxation #selfcare"
-#   expected_output: >
-#     A document formatted as markdown, with several sections. Each section should contain the copy for a single Instagram post, along with the relevant hashtags and calls to action. The copy should be engaging, on-brand, and aligned with the content calendar.
-
-# report_final_content_strategy:
-#   description: >
-#     Compile a comprehensive report that outlines the final content strategy for the week. The report should include the market research findings, the content calendar, the copy for each post, and the AI-generated images. Provide a brief rationale for the strategy, explaining how it aligns with the identified trends and audience preferences.
-
-#   expected_output: >
-#     A detailed report that includes the market research findings, the content calendar, the copy for each post, and the AI-generated images. The report should be formatted as markdown and include a brief rationale for the strategy, explaining how it aligns with the identified trends and audience preferences.
-
-# decide:
-#   description: >
-#     hi
-#   expected_output: >
-#     {
-#       "Marketing": {
-#         "ShouldTalkTo": true,
-#         "Speech": "We should focus on targeting younger audiences for this campaign."
-#       },
-#       "Software": {
-#         "ShouldTalkTo": false,
-#         "Speech": "No further updates are required for this module at the moment."
-#       },
-#       "Movement": {
-#         "x": 10,
-#         "y": -5
-#       }
-#     }

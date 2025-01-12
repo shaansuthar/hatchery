@@ -3,36 +3,38 @@ from crewai import Task
 from crewai.project import CrewBase
 from crewai_tools import DallETool
 
-now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+# now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+now = "prod"
 
 @CrewBase
 class MarketingTasks():
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
-    def market_research(self, agent, context) -> Task:
-        return Task(
-            config=self.tasks_config["market_research"],
-            agent=agent,
-            context=context,
-            output_file=f"src/agents/simulations/{now}/market_research.md",
-        )
+    # def market_research(self, agent, context) -> Task:
+    #     return Task(
+    #         config=self.tasks_config["market_research"],
+    #         agent=agent,
+    #         context=context,
+    #         output_file=f"src/agents/simulations/{now}/market_research.md",
+    #     )
 
-    def creative_design_task(self, agent, context) -> Task:
-        return Task(
-            config=self.tasks_config["creative_design"],
-            agent=agent,
-            context=context,
-            output_file=f"src/agents/simulations/{now}/visual-content.md",
-            tools=[DallETool()],
-        )
+    # def creative_design_task(self, agent, context) -> Task:
+    #     return Task(
+    #         config=self.tasks_config["creative_design"],
+    #         agent=agent,
+    #         context=context,
+    #         output_file=f"src/agents/simulations/{now}/visual-content.md",
+    #         tools=[DallETool()],
+    #     )
 
-    def copywriting_task(self, agent, context) -> Task:
+    def generate_post_task(self, agent, context) -> Task:
         return Task(
-            config=self.tasks_config["copywriting"],
+            config=self.tasks_config["generate_post"],
             agent=agent,
             context=context,
-            output_file=f"src/agents/simulations/{now}/copywriting.md",
+            # tools=[DallETool()],
+            output_file=f"src/agents/simulations/{now}/caption.md",
         )
     
     def move_character_task(self, agent, context) -> Task:

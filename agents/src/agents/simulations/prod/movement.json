@@ -1,0 +1,10 @@
+{
+  "Marketing": {
+    "ShouldTalkTo": true,
+    "Speech": "Based on the marketing requirements, we need to align our Instagram campaign with the target audience insights, key selling points, branding elements, and messaging strategies. I have delegated specific tasks to each team member to ensure we cover all aspects of the campaign effectively and achieve our goals. Let's focus on targeting Electrical Engineering students, professionals, and enthusiasts interested in semiconductor chip design, utilizing educational content on platforms like LinkedIn and technical forums. Additionally, we should highlight our expertise in analog and mixed-signal design and showcase real-world applications of RTL development. I will ensure that our branding elements, voice, and messaging strategies resonate with our target audience, and I will provide updates on our progress and any insights that can enhance our campaign."
+  },
+  "Software": {
+    "ShouldTalkTo": false,
+    "Speech": "Our software platform should align with the core functionalities and technical requirements outlined. We must ensure robust simulation tools, tailored IDE for RTL development, virtual labs, collaborative spaces, and tools for progress tracking are well integrated. Security, scalability, cross-device compatibility, optimized performance, and data analytics should also be prioritized. No further updates are required at the moment, but I will continue to monitor our platform's performance and user experience to deliver a seamless and user-centric experience for our learners and industry professionals."
+}
+}

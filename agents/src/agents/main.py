@@ -31,33 +31,30 @@ def run():
 
     # Initialize the OpenAI GPT-4 language model
     OpenAIGPT4 = ChatOpenAI(
-        model="gpt-4"
+        model="gpt-3.5-turbo" #gpt-4
     )
 
 
     # Instantiate the agents
-    copywriter = agents.copywriter()
-    creative_designer = agents.creative_designer()
+    copywriter = agents.caption_writer()
+    requirements_engineer = agents.requirements_engineer()
     manager = agents.manager()
-    market_researcher = agents.market_researcher()
 
     # Instantiate the tasks
     generate_requirements_task = tasks.generate_requirements_task(manager)
-    creative_design_task = tasks.creative_design_task(creative_designer, [generate_requirements_task])
-    market_research = tasks.market_research(market_researcher, [generate_requirements_task])
     move_character_task = tasks.move_character_task(manager, [generate_requirements_task])
-    copywriting_task = tasks.copywriting_task(copywriter, [generate_requirements_task])
+    generate_post_task = tasks.generate_post_task(requirements_engineer, [generate_requirements_task])
 
     # Form the crew
     crew = Crew(
-        agents=[copywriter, creative_designer, manager, market_researcher],
-        tasks=[generate_requirements_task, creative_design_task, market_research, move_character_task, copywriting_task],
+        agents=[copywriter, manager, requirements_engineer],
+        tasks=[generate_requirements_task, move_character_task, generate_post_task],
         process=Process.hierarchical,
         manager_llm=OpenAIGPT4,
         verbose=1
     )
 
-    with open('map_example.json', 'r') as file:
+    with open('default.json', 'r') as file:
         office_map = json.load(file)
 
     office_map_string = json.dumps(office_map, indent=2)

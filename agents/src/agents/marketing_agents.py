@@ -15,28 +15,36 @@ class MarketingAgents():
             # llm=llm,
         )
 
-    def market_researcher(self) -> Agent:
+    # def market_researcher(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config["market_researcher"],
+    #         # tools=[
+    #         #   SearchTools.open_page,
+    #         # ],
+    #         verbose=True,
+    #         # llm=llm,
+    #         allow_delegation=False,
+    #     )
+
+    # def creative_designer(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config["creative_designer"],
+    #         verbose=True,
+    #         allow_delegation=False,
+    #         # llm=llm,
+    #     )
+
+    def caption_writer(self) -> Agent:
         return Agent(
-            config=self.agents_config["market_researcher"],
-            # tools=[
-            #   SearchTools.open_page,
-            # ],
+            config=self.agents_config["caption_writer"],
             verbose=True,
             # llm=llm,
             allow_delegation=False,
         )
-
-    def creative_designer(self) -> Agent:
+    
+    def requirements_engineer(self) -> Agent:
         return Agent(
-            config=self.agents_config["creative_designer"],
-            verbose=True,
-            allow_delegation=False,
-            # llm=llm,
-        )
-
-    def copywriter(self) -> Agent:
-        return Agent(
-            config=self.agents_config["copywriter"],
+            config=self.agents_config["requirements_engineer"],
             verbose=True,
             # llm=llm,
             allow_delegation=False,
