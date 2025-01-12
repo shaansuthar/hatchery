@@ -1,14 +1,14 @@
 {
   "Marketing": {
     "ShouldTalkTo": true,
-    "Speech": "We should gather the marketing team in the meeting room to discuss the new Analog and Mixed-Signal Design program and how it aligns with our marketing strategy."
+    "Speech": "We should coordinate with the Marketing team to align our strategies for the upcoming campaign launch."
   },
   "Software": {
-    "ShouldTalkTo": true,
-    "Speech": "Please ensure that the necessary software updates are in place to support the new learning journey for Analog and Mixed-Signal Design."
+    "ShouldTalkTo": false,
+    "Speech": "No immediate updates are needed for the Software team's current module."
   },
   "Movement": {
-    "x": 5,
-    "y": 3
+    "x": 6,
+    "y": 5
   }
 }

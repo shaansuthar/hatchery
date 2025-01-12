@@ -73,4 +73,13 @@ class MarketingAgents():
             allow_delegation=False,
             verbose=True,
             max_iter=self.iterations,
+            allow_code_execution=True,
+        )
+    
+    def requirements_engineer(self) -> Agent:
+        return Agent(
+            config=self.agents_config["requirements_engineer"],
+            allow_delegation=False,
+            verbose=True,
+            max_iter=self.iterations,
         )
