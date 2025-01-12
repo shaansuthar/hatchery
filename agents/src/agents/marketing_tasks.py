@@ -60,6 +60,7 @@ class MarketingTasks():
             agent=agent,
             context=context,
             output_file=f"src/agents/simulations/{now}/movement.json",
+            # guardrail=validate_json_output
         )
 
     def generate_post_task(self, agent, context, callback_function) -> Task:
@@ -67,8 +68,9 @@ class MarketingTasks():
             config=self.tasks_config["generate_post"],
             agent=agent,
             context=context,
-            output_file=f"src/agents/simulations/{now}/generate_post.md",
-            callback=callback_function
+            output_file=f"src/agents/simulations/{now}/generate_post.json",
+            callback=callback_function,
+            # guardrail=validate_json_output
         )
 
     def marketing_requirements_task(self, agent, context) -> Task:
