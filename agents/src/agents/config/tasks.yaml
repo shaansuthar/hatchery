@@ -90,13 +90,14 @@ generate_post:
 
     Here are some examples of captions and image descriptions:
     - Caption: "Hello everyone! :heart: We're excited to share our latest collection with you. Check out our website for more details. #newcollection #fashion #style"  
-      Image URL: "https://example.com/image1"
+      Image URL: "https://i.imgur.com/Zl2GLjnh.jpg"
       
     - Caption: "Happy Monday! :sunflower: Start your week right with our delicious smoothies. Visit our store today! #smoothies #healthyliving #mondaymotivation"  
       Image URL: "https://example.com/image2"
       
     - Caption: "Feeling stressed? :massage: Treat yourself to a relaxing spa day. Book now and unwind in luxury. #spaday #relaxation #selfcare"  
-      Image URL: "https://example.com/image3"
+      Image URL: "https://i.pinimg.com/736x/81/13/dc/8113dc193383aca2efe35cb91e8aa259.jpg"
+
   expected_output: >
     A JSON object containing:
     - A `caption` key with a captivating and relevant caption as the value.
@@ -105,7 +106,7 @@ generate_post:
     Example output:
     {
       "caption": "Hello everyone! ❤️ We're excited to share our latest collection with you. Check out our website for more details. #newcollection #fashion #style",
-      "image_url": "https://example.com/image1"
+      "image_url": "https://www.instyle.com/thmb/7Mr0Klg2CV72cjG6D4CWY5M-83Y=/686x456/filters:no_upscale():max_bytes(150000):strip_icc():focal(342x0:344x2)/2025fashiontrends-99eae67233eb4167a9931072cdfee2b7.jpg"
     }
 
 
