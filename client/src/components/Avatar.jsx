@@ -117,30 +117,30 @@ export function Avatar({
       }
 
       // Handle Marketing team
-      if (id.startsWith("marketing_") && data.Marketing) {
-        if (data.Marketing.Speech) {
-          onPlayerChatMessage({ id, message: data.Marketing.Speech });
-        }
-        if (data.Movement) {
-          onPlayerMove({
-            id,
-            path: [[data.Movement.x, data.Movement.y]]
-          });
-        }
-      }
+      // if (id.startsWith("marketing_") && data.Marketing) {
+      //   if (data.Marketing.Speech) {
+      //     onPlayerChatMessage({ id, message: data.Marketing.Speech });
+      //   }
+      //   if (data.Movement) {
+      //     onPlayerMove({
+      //       id,
+      //       path: [[data.Movement.x, data.Movement.y]]
+      //     });
+      //   }
+      // }
 
-      // Handle Development team
-      if (id.startsWith("developer_") && data.Software) {
-        if (data.Software.Speech) {
-          onPlayerChatMessage({ id, message: data.Software.Speech });
-        }
-        if (data.Movement) {
-          onPlayerMove({
-            id,
-            path: [[data.Movement.x, data.Movement.y]]
-          });
-        }
-      }
+      // // Handle Development team
+      // if (id.startsWith("developer_") && data.Software) {
+      //   if (data.Software.Speech) {
+      //     onPlayerChatMessage({ id, message: data.Software.Speech });
+      //   }
+      //   if (data.Movement) {
+      //     onPlayerMove({
+      //       id,
+      //       path: [[data.Movement.x, data.Movement.y]]
+      //     });
+      //   }
+      // }
     }
 
     socket.on("playerMove", onPlayerMove);
