@@ -1,14 +1,14 @@
 {
   "Marketing": {
     "ShouldTalkTo": true,
-    "Speech": "We should coordinate with the marketing team to align our messaging with their campaign targeting younger audiences."
+    "Speech": "We should focus on creating a marketing campaign that highlights the unique selling points of our chameleon-selling app to attract our target audience."
   },
   "Software": {
-    "ShouldTalkTo": false,
-    "Speech": "No immediate updates required for the software development team at this moment."
+    "ShouldTalkTo": true,
+    "Speech": "We need to prioritize developing features that enhance user interaction and engagement within the chameleon-selling app to increase user retention and satisfaction."
   },
   "Movement": {
-    "x": 6,
-    "y": 4
+    "X": 6,
+    "Y": 7
   }
 }

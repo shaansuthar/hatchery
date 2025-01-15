@@ -93,7 +93,7 @@ def run():
     generate_post_task = tasks.generate_post_task(
         agent=caption_writer,
         context=[marketing_requirements_task, software_requirements_task],
-        # callback_function=post_tweet
+        callback_function=post_tweet
     )
     
     # move_character_task = tasks.move_character_task(

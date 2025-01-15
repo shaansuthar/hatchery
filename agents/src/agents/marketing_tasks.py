@@ -63,13 +63,13 @@ class MarketingTasks():
             # guardrail=validate_json_output
         )
 
-    def generate_post_task(self, agent, context) -> Task: #, callback_function
+    def generate_post_task(self, agent, context, callback_function) -> Task: #, callback_function
         return Task(
             config=self.tasks_config["generate_post"],
             agent=agent,
             context=context,
             output_file=f"src/agents/simulations/{now}/generate_post.json",
-            # callback=callback_function,
+            callback=callback_function,
             # guardrail=validate_json_output
         )
 

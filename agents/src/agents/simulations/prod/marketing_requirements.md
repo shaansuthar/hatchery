@@ -1,57 +1,53 @@
-# Software Requirements for Universal Electric Car Charger Payments System
+**Software Requirements Document for Chameleon-Selling App**
 
-## Core Features:
-1. **User Registration**:
-   - Users should be able to create accounts, manage personal information, and track charging history.
-   
-2. **Charger Locator**:
-   - An interactive map feature that allows users to find nearby charging stations, check availability, and receive directions.
-   
-3. **Payment Processing**:
-   - Secure payment system supporting multiple payment methods for user convenience.
-   
-4. **Sustainability Tracking**:
-   - Integration with sustainability metrics to track carbon footprint reduction and promote eco-friendly charging habits.
-   
-5. **Real-time Updates**:
-   - Users should receive real-time notifications about charging status, payment confirmation, and station availability.
-   
-6. **Customer Support**:
-   - Robust customer support features including chatbot assistance, FAQ section, and in-app messaging for queries.
+1. **Introduction:**
+   The chameleon-selling app aims to provide a platform for users to buy and sell chameleons online. This document outlines the core functionalities, user experience goals, and technical needs based on the provided marketing requirements.
 
-## UX Goals:
-1. **Intuitive Interface Design**:
-   - User-friendly interface with easy navigation, clear information display, and intuitive interactions.
-   
-2. **Personalization Options**:
-   - Customizable settings for user preferences, charging notifications, and personalized recommendations.
-   
-3. **Speed and Efficiency**:
-   - Fast loading times, quick payment processing, and responsive design for seamless user experience.
-   
-4. **Accessibility**:
-   - ADA-compliant features for users with disabilities, language options, and inclusive design principles.
-   
-5. **Feedback Mechanisms**:
-   - In-app feedback forms, rating systems, and user surveys to gather input for continuous improvement.
+2. **Core Functionalities:**
+   2.1. User Registration:
+         - Users should be able to register an account with email and password.
+         - Optional registration through social media accounts (Google, Facebook).
 
-## Technical Specifications:
-1. **Backend Technology**:
-   - Python with Django framework for robust backend development.
-   
-2. **Database**:
-   - PostgreSQL database for data storage, management, and retrieval.
-   
-3. **API Integration**:
-   - Integration with payment gateways, charging station APIs, and sustainability tracking APIs for seamless data exchange.
-   
-4. **Security Measures**:
-   - Encryption protocols, secure authentication methods, and data protection mechanisms to safeguard user information.
-   
-5. **Scalability**:
-   - Scalable architecture to accommodate growing user base, increased charging stations, and future feature expansions.
-   
-6. **Testing and Quality Assurance**:
-   - Comprehensive testing procedures including unit testing, integration testing, and user acceptance testing to ensure system reliability and performance.
+   2.2. Listing:
+         - Sellers can create listings for chameleons they want to sell.
+         - Mandatory fields for listings include: chameleon species, age, price, location, and images.
+         - Basic and advanced search functionalities for users to find specific chameleons.
 
-These software requirements are designed to meet the needs of tech-savvy individuals aged between 25 to 45 years old who value convenience, sustainability, and innovation. By incorporating these features, goals, and specifications, the universal electric car charger payments system will deliver a seamless user experience and contribute to promoting eco-friendly transportation solutions.
+   2.3. Purchasing:
+         - Users should be able to contact sellers for purchasing inquiries.
+         - Secure payment gateway integration for transactions.
+         - In-app messaging system for communication between buyers and sellers.
+
+   2.4. User Profiles:
+         - User profiles with options to view and manage listings, messages, and account details.
+         - Ratings and reviews system for buyers and sellers.
+
+3. **User Experience Goals:**
+   3.1. Simplified Navigation:
+         - Intuitive interface for easy browsing of listings.
+         - Clear call-to-action buttons for key functionalities.
+
+   3.2. Personalization:
+         - Customized recommendations based on user preferences and search history.
+         - Notification system for updates on listings and messages.
+
+   3.3. Trust and Security:
+         - Implement security measures to protect user data.
+         - Transparent seller ratings and reviews to build trust among users.
+
+4. **Technical Needs:**
+   4.1. Tech Stack:
+         - Python Django framework for backend development.
+         - React.js for frontend development.
+         - Postgres database for storing user and listing information.
+
+   4.2. Scalability:
+         - Hosting on a cloud platform for scalability and performance.
+         - Implementing RESTful APIs for seamless communication between frontend and backend.
+
+   4.3. Security:
+         - Encryption of sensitive data during transmission and storage.
+         - Regular security audits and updates to prevent vulnerabilities.
+
+5. **Conclusion:**
+   The chameleon-selling app aims to provide a user-friendly platform for chameleon enthusiasts to connect, buy, and sell chameleons securely. By implementing the core functionalities, user experience goals, and technical needs outlined in this document, we can ensure a successful and efficient app development process.

@@ -1,0 +1,16 @@
+# CrewAI stuff
+# MODEL=ollama/mistral
+# API_BASE=http://localhost:11434
+# GEMINI_API_KEY=blah
+OPENAI_MODEL_NAME=gpt-3.5-turbo
+OPENAI_API_KEY=blah
+# COHERE_API_KEY=blah
+
+# Twitter stuff
+NODE_ENV=development
+API_KEY=blah
+API_SECRET=blah
+ACCESS_TOKEN=blah
+ACCESS_SECRET=blah
+BEARER_TOKEN=blah
+APP_ID=blah
